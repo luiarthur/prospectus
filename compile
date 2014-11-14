@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pdflatex prospectus.tex
+rm -f *.log *.aux *.out *.snm *.toc
+firefox prospectus.pdf &
+
