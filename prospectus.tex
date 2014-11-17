@@ -1,4 +1,7 @@
-\documentclass{article}                                                   %
+% Template
+\documentclass[]{statthesisMEMOIR}
+ 
+%\documentclass{article}                                                   %
 \usepackage{fullpage}                                                     %
 \usepackage{pgffor}                                                       %
 \usepackage{amssymb}                                                      %
@@ -21,17 +24,22 @@
 \def\piano#1#2#3#4{\frac{\ds #1}{\ds\int_{#2}^{#3}#1 d#4}}                %
 \def\mleStart#1#2{\mathcal{L}(#2|\bm{#1}) &=& \prodl f(#1_i|#2)}          %
 \def\dig#1#2#3{\frac{1}{\Gamma(#2)#3 ^ #2} (#1)^{-( #2+1)} e^{\frac{-1}{#3 #1}}}
-                                                                          %
-\begin{document}                                                          %
-% my title:                                                               %
-\begin{center}                                                            %
-  \section*{\textbf{Prospectus}}                                          %
-  \subsection*{\textbf{Arthur Lui}}                                       %
-  \subsection*{\noindent\today}                                           %
-\end{center}                                                              %
-\setkeys{Gin}{width=0.5\textwidth}                                        %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\title{Infinite Latent Feature Models Indexed by \titlebreak 
+       Pairwise Distance Information}
+\author{Arthur Lui}
+\chair{David B. Dahl}
+\committee{x1}
+\committeetwo{x2}
+\typeofwork{Project} % project or thesis
+\graddate{April 2014}
+\copyrightyear{2014}
+\keywords{Bayesian nonparametrics, Indian buffet process, latent feature models}
+\abstract{test}
+\acknowledgments{awesome}
+
+\begin{document}
 
 \section{Introduction} % ~ 1-2 pages. Define the problem.
 %The goal of this project is to extend the Indian Buffet Process (IBP) to include
@@ -74,7 +82,6 @@ sampled by customer i.
 
 
 
-
 % What is the IBP?
 % Gibbs sampler to draw from prior
 % Gibbs sampler to draw from posterior
@@ -84,4 +91,8 @@ sampled by customer i.
 % ddIBP?
 
 \section{Methods} %~3-8 pages
+
+%\bibliography{bibliography}
+%\appendix
+%\input appA.tex
 \end{document}
