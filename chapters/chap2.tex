@@ -39,7 +39,18 @@ sampled by customer i. %cite the derivation
 Here we describe how to implement a Gibbs sampler to draw from the IBP. 
 To sample from Z $\sim$ IBP($\alpha$):\\
 
-1)
+\begin{enumerate}
+  \item Start with an arbitrary binary matrix
+  \item For each row, i,
+  \begin{enumerate}
+    \item For each column, k,
+    \item if $m_{-i,k}$ = 0, delete column k. Otherwise,
+    \item set $z_{ik}$ to 0
+    \item set $z_{ik}$ to 1 with probability $P(z_{ik}=1|\bm{z_{-i,k}}) = \frac{m_{-i,k}}{i}$
+    \item at the end of row i, add Poisson($\ds\frac{\alpha}{N}$) columns of 1's
+  \end{enumerate}
+  \item iterate step 2 a large number of times
+\end{enumerate}
 
 
 % What is the IBP?
