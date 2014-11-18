@@ -53,10 +53,13 @@ To sample from Z $\sim$ IBP($\alpha$):
 \end{enumerate}
 We can likewise incorporate this Gibbs sampler to sample from the posterior distribution P($\bm{Z|X}$)
 where $\bm Z \sim IBP(\alpha)$ by sampling from the complete conditional
+
 \[
   P(z_{ik}=1|\bm{Z_{-(ik)},X})  \propto p(\bm{X|Z}) P(z_{ik}=1|\bm{Z_{-(ik)}})
 \]
 
+\subsection{Applications}
+\subsection{Distance Dependent Indian Buffet Process}
 % What is the IBP? # Done
 % Gibbs sampler to draw from prior # Done
 % Gibbs sampler to draw from posterior # Need
