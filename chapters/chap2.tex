@@ -37,7 +37,7 @@ sampled by customer i. %cite the derivation
 
 \subsection{Gibbs sampler}
 Here we describe how to implement a Gibbs sampler to draw from the IBP. 
-To sample from Z $\sim$ IBP($\alpha$):\\
+To sample from Z $\sim$ IBP($\alpha$):
 
 \begin{enumerate}
   \item Start with an arbitrary binary matrix
@@ -51,11 +51,15 @@ To sample from Z $\sim$ IBP($\alpha$):\\
   \end{enumerate}
   \item iterate step 2 a large number of times
 \end{enumerate}
+We can likewise incorporate this Gibbs sampler to sample from the posterior distribution P($\bm{Z|X}$)
+where $\bm Z \sim IBP(\alpha)$ by sampling from the complete conditional
+\[
+  P(z_{ik}=1|\bm{Z_{-(ik)},X})  \propto p(\bm{X|Z}) P(z_{ik}=1|\bm{Z_{-(ik)}})
+\]
 
-
-% What is the IBP?
-% Gibbs sampler to draw from prior
-% Gibbs sampler to draw from posterior
+% What is the IBP? # Done
+% Gibbs sampler to draw from prior # Done
+% Gibbs sampler to draw from posterior # Need
 % What is it used for?
 % Where are the applications?
 % Why would it be useful to include distance information?
