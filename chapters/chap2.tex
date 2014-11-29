@@ -93,11 +93,31 @@ introducing the probability mass function, I will review some notation.\\
 
 \noindent
 Let $\pi_n$ be a discrete partition distribution, as defined in the previous
-section. Let the permutation $\bm \sigma = (\sigma_1,...,\sigma_n)$ be the 
-order in which each item is allocated, where the $t^{th}$ item to be 
-allocated is $\sigma_t$. This is not necessarily the order of the n items in 
-the dataset. 
-\\
+section. Let the permutation $\bm \sigma = (\sigma_1,...,\sigma_n)$ be the order
+in which each item is allocated, where the $t^{th}$ item to be allocated is
+$\sigma_t$. This is not necessarily the order of the n items in the dataset. In
+addition, at time $t > 1$, let $\pi(\sigma_{1},...,\sigma_{t-1})$ represent the
+current partition created from allocating $\sigma_{1},...,\sigma_{t-1}$. Note
+that the complete partition $\pi_n = \pi(\sigma_{1},...,\sigma_{n})$.\\
+
+\noindent
+The EPA distribution incorporates pairwise distance information. A possible
+metrics for measuring distance is the Euclidean metric. Let $d_{ij}$ denote the
+distance between two items, i \& j. Let the function $\lambda(i,j)$ represent
+the similarity of items i \& j (i.e. how ``close" two items are, where a larger
+value indicates the two items are closer together). A large class of similarity
+functions can be represented as a function of the distance information. That is
+$\lambda(i,j)$ can be written as $f(d_{ij})$ in many cases, where $f(\cdot)$ is a
+non-increasing function. For instance, $\lambda(i,j)$ can be ${d_{ij}}^{-\tau}$,
+where $\tau>0$ and is called the \textit{temperature} and has a dampening or
+accentuating effect on the distance.\\
+
+\noindent
+
+
+
+
+
 
 \noindent
 \textbf{STOPPED RIGHT HERE!!!}
@@ -164,7 +184,6 @@ where $\bm Z \sim IBP(\alpha)$ by sampling from the complete conditional
 %constructed by Gershman, Frazier, and Blei (2012). We wish to create a model 
 %similar to it. We will first review the ddIBP.
 
-\subsection{Random Partition Distribution Indexed by Pairwise Information}
 
 
 
