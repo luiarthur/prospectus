@@ -87,8 +87,8 @@ Blei's proposed ddcrp. Blei describes a Gibbs sampler to sample from the
 ddcrp and its posterior.
 
 \subsection{Ewens-Pittman Attraction Distribution}
-The Ewens-Pitmann Attraction (EPA) distribution is yet another partition
-distribution that incorporates pairwise distance information. Before 
+The Ewens-Pitmann Attraction (EPA) distribution is another partition
+distribution that incorporates pairwise distance information. Before
 introducing the probability mass function, I will review some notation.\\
 
 \noindent
@@ -103,8 +103,8 @@ that the complete partition $\pi_n = \pi(\sigma_{1},...,\sigma_{n})$.\\
 \noindent
 The EPA distribution incorporates pairwise distance information. A possible
 metrics for measuring distance is the Euclidean metric. Let $d_{ij}$ denote the
-distance between two items, i \& j. Let the function $\lambda(i,j)$ represent
-the similarity of items i \& j (i.e. how ``close" two items are, where a larger
+distance between two items, $i$ and $j$. Let the function $\lambda(i,j)$ represent
+the similarity of items $i$ and $j$ (i.e. how ``close" two items are, where a larger
 value indicates the two items are closer together). A large class of similarity
 functions can be represented as a function of the distance information. That is
 $\lambda(i,j)$ can be written as $f(d_{ij})$ in many cases, where $f(\cdot)$ is a
@@ -113,9 +113,28 @@ where $\tau>0$ and is called the \textit{temperature} and has a dampening or
 accentuating effect on the distance.\\
 
 \noindent
-
-
-
+The EPA distribution is also defined by a mass parameter, $\alpha > 0$, and a discount
+parameter, $\delta \in [0,1)$. The probability mass function for a partition 
+distribution $\pi_n$ following the EPA distribution can be defined as follows:
+\begin{equation}
+  p(\pi_n|\alpha,\delta,\lambda,\bm\sigma)=
+    \prodl{i}{1}{n}p_t(\alpha,\delta,\lambda,\pi(\sigma_1,...,\sigma_{t-1}))
+\end{equation}
+where $p_t(\alpha,\delta,\lambda,\pi(\sigma_1,...,\sigma_{t-1}))$ is defined as:
+\begin{equation}
+  P(\sigma \in S | \alpha,\delta,\lambda,\pi(\sigma_1,...,\sigma_{t-1}))=
+  \begin{cases}
+    \begin{array}{ll}
+      \ds\frac{t-1-\delta q_{t-1}}{\alpha+t-1} \cdot 
+        \frac{\sum_{\sigma_s \in S}\lambda(\sigma_t,\sigma_s)}
+        {\sum_{s=1}^{t-1}\lambda(\sigma_t,\sigma_s)} & 
+        \text{for }S \in \pi(\sigma_1,...,\sigma_{t-1})\\
+      \ds\frac{\alpha+\delta q_{t-1}}{\alpha+t-1} &  \text{for }S  = \o \\
+    \end{array}
+  \end{cases}
+\end{equation}
+Note that the ratio of sums in (2.5) represents the proportion of \textit{total
+attraction} of item $\sigma$ to the items allocated to subset $S$.
 
 
 
@@ -133,9 +152,9 @@ The Indian buffet process is a distribution on infinite sparse binary matrices.
 (i.e. matrices with finite number of rows and infinite number of columns.) The
 IBP is a multivariate extension of the Chinese restaurant process. For an N x K
 matrix, Z, that follows an IBP($\alpha$) distribution, element $z_{ik}$ is 1 if
-observation (customer) i possess feature (dish) k, and 0 otherwise.  And
-$\alpha$ is a parameter that determines the sparsity of the matrix. The larger
-$\alpha$ is, the more likely Z will be sparse. The process can be generated as
+observation (customer) i possesses feature (dish) k, and 0 otherwise.  
+$\alpha$ is a parameter that determines the sparsness of the matrix. The larger
+$\alpha$ is, the more likely Z will be sparse. The IBP can be generated as
 follows: \\
 
 \noindent
