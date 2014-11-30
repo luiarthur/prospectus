@@ -56,8 +56,8 @@ partition distribution is
 \end{equation}
 
 \noindent
-Gibbs samplers to generate this process has been studied extensively. 
-An valuable list and comprison of algorithms to draw from the posterior with 
+Gibbs samplers to generate this process have been studied extensively. 
+A valuable list and comprison of algorithms to draw from the posterior with 
 a CRP prior was compiled by Neal (2000).
 
 \subsection{Distance Dependent Chinese Restaurant Process}
@@ -67,7 +67,7 @@ dependent Chinese restaurant process (ddCRP). \\
 
 \noindent
 Given a distance matrix, D, and a mass parameter, $\alpha$, the probability
-of customer i being ``assigned" to sit with customer j is 
+of customer $i$ being ``assigned" to sit with customer $j$ is 
 \begin{equation}
   P(c_i=j|D,\alpha) \propto 
   \begin{cases}
@@ -82,7 +82,7 @@ where $f(d_{ij})$ is a decay function with the properties: (1) $f(\cdot) \ge 0$,
 is again $\frac{1}{\alpha+i-1}$. Customers assigned to sit together at a table
 form a cluster. The resulting distribution is a partition distribution that
 includes pairwise distance information. However, no closed form probability 
-mass function for the resulting partition distribution can be written for 
+mass function for the resulting partition distribution has been written for 
 Blei's proposed ddcrp. Blei describes a Gibbs sampler to sample from the 
 ddcrp and its posterior.
 
@@ -102,15 +102,15 @@ that the complete partition $\pi_n = \pi(\sigma_{1},...,\sigma_{n})$.\\
 
 \noindent
 The EPA distribution incorporates pairwise distance information. A possible
-metrics for measuring distance is the Euclidean metric. Let $d_{ij}$ denote the
+metric for measuring distance is the Euclidean metric. Let $d_{ij}$ denote the
 distance between two items, $i$ and $j$. Let the function $\lambda(i,j)$ represent
 the similarity of items $i$ and $j$ (i.e. how ``close" two items are, where a larger
-value indicates the two items are closer together). A large class of similarity
+value indicates that the two items are closer together). A large class of similarity
 functions can be represented as a function of the distance information. That is
 $\lambda(i,j)$ can be written as $f(d_{ij})$ in many cases, where $f(\cdot)$ is a
 non-increasing function. For instance, $\lambda(i,j)$ can be ${d_{ij}}^{-\tau}$,
-where $\tau>0$ and is called the \textit{temperature} and has a dampening or
-accentuating effect on the distance.\\
+where $\tau>0$ and is called the \textit{temperature} and can dampen or
+accentuate the effect of distance.\\
 
 \noindent
 The EPA distribution is also defined by a mass parameter, $\alpha > 0$, and a discount
@@ -134,7 +134,7 @@ where $p_t(\alpha,\delta,\lambda,\pi(\sigma_1,...,\sigma_{t-1}))$ is defined as:
   \end{cases}
 \end{equation}
 Note that the ratio of sums in (2.5) represents the proportion of \textit{total
-attraction} of item $\sigma$ to the items allocated to subset $S$.
+attraction} of item $\sigma_t$ to the items allocated to subset $S$.
 
 
 
