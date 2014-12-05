@@ -2,5 +2,5 @@
 
 pdflatex main.tex
 #rm -f *.log *.aux *.out *.snm *.toc
-rm -f *.log
+#rm -f *.log
 firefox main.pdf &
