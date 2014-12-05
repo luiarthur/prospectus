@@ -33,12 +33,12 @@ $i = 1,...,n$. Then,
   P(z_i=k|z_{1:(i-1)},\alpha) \propto 
   \begin{cases}
     \begin{array}{rll}
-      n_k,    & if & k \le K\\
-      \alpha, & if & k = K+1\\
+      n_k,    & \text{if} & k \le K\\
+      \alpha, & \text{if} & k = K+1\\
     \end{array}
   \end{cases}
 \end{equation}
-where the normalizing constant is $\frac{1}{\alpha+i-1}$, $n_k$ is the number
+where the normalizing constant is ${(\alpha+i-1)}^{-1}$, $n_k$ is the number
 of customers in table k before seating customer $i$, K is the number of
 occupied tables before seating customer $i$, and $\alpha$ is a mass parameter
 which determines the number of tables that will eventually be occupied by the n
@@ -60,7 +60,14 @@ function for this partition distribution, the Ewens-Pitman distribution, is
 \noindent
 Gibbs samplers to generate this process have been studied extensively. 
 A valuable list and comprison of algorithms to draw from the posterior with 
-a CRP prior was compiled by Neal (2000).
+a CRP prior was compiled by Neal (2000). An implementation of some of these
+algorithms in \textbf{R} and \textbf{SCALA} can be found at my github account: 
+https://github.com/luiarthur/auxGibbs/tree/master/scala\\
+
+%\noindent
+%I will describe Algorithm 8 from Neals paper. \\
+%Let the state
+
 
 \subsection{Distance Dependent Chinese Restaurant Process}
 Researchers such as Blei \& Frazier have extended CRP to include 
@@ -74,14 +81,14 @@ of customer $i$ being ``assigned" to sit with customer $j$ is
   P(c_i=j|D,\alpha) \propto 
   \begin{cases}
     \begin{array}{rll}
-      f(d_{ij}), & if & j \ne i\\
-      \alpha,    & if & i=j
+      f(d_{ij}), & \text{if} & j \ne i\\
+      \alpha,    & \text{if} & i=j
     \end{array}  
   \end{cases}
 \end{equation}
 where $f(d_{ij})$ is a decay function with the properties: (1) $f(\cdot) \ge 0$,
 (2) $f(\infty) = 0$, and $f(\cdot)$ is non-decreasing. The normalizing constant 
-is again $\frac{1}{\alpha+i-1}$. Customers assigned to sit together at a table
+is again $(\alpha+i-1)^{-1}$. Customers assigned to sit together at a table
 form a cluster. The resulting distribution is a partition distribution that
 includes pairwise distance information. However, no closed form probability 
 mass function for the resulting partition distribution has been written for 
@@ -170,7 +177,7 @@ restaurants.\\
 Let $Z$ be an $N \times \infty$ binary matrix. Each row in $Z$ represents a
 customer which enters an Indian buffet and each column represents a dish in the
 buffet. Customers enter the restaurant one after another. The first customer
-samples an $r=Poisson(\alpha)$ number of dishes, where $\alpha > 0$ is a mass
+samples an $r=$Poisson$(\alpha)$ number of dishes, where $\alpha > 0$ is a mass
 parameter which influences the final number of sampled dishes. This is
 indicated in by setting the first r columns of the first row in $Z$ to be $1$.
 The other values in the row are set to $0$. Each subsequent customer samples
@@ -178,10 +185,10 @@ each previously sampled dish with probability proportional to its popularity.
 That is, the next customer samples dish $k$ with probability $\frac{m_k}{i}$,
 where $m_k$ is the number of customers that sampled dish $k$, and $i$ is the
 current customer number (or row number in $Z$). Each customer also samples an
-additional $Poisson(\alpha/i)$ number of new dishes. Once all the $N$ customers
+additional Poisson$(\alpha/i)$ number of new dishes. Once all the $N$ customers
 have gone through this process, the resulting $Z$ matrix will be a draw from
 the Indian buffet process with mass parameter $\alpha$. In other words, $Z \sim
-IBP(\alpha)$. Note that $\alpha \propto K_+$, where $K_+$ is the final number of
+\text{IBP}(\alpha)$. Note that $\alpha \propto K_+$, where $K_+$ is the final number of
 sampled dishes (occupied columns). Figure 2.1 shows a draw from an IBP(10) with 50
 rows. The white squares are 1, indicating that a dish was taken; black squares
 are 0, indicating that a dish was not taken. \\
@@ -218,7 +225,7 @@ the description above. Another way is to implement a Gibbs sampler as follows:
   \item iterate step 2 a large number of times
 \end{enumerate}
 We can likewise incorporate this Gibbs sampler to sample from the posterior distribution P($\bm{Z|X}$)
-where $\bm Z \sim IBP(\alpha)$ by sampling from the complete conditional
+where $\bm Z \sim \text{IBP}(\alpha)$ by sampling from the complete conditional
 \begin{equation}
   P(z_{ik}=1|\bm{Z_{-(ik)},X})  \propto p(\bm{X|Z}) P(z_{ik}=1|\bm{Z_{-(ik)}}).
 \end{equation}\\
@@ -228,8 +235,8 @@ where $\bm Z \sim IBP(\alpha)$ by sampling from the complete conditional
 Note that a conjugate prior for $\alpha$ is a Gamma distribution.
 \[
   \begin{array}{rcl}
-    \bm Z|\alpha & \sim & IBP(\alpha)\\
-          \alpha & \sim & Gamma(a,b), \text{where $b$ is the scale parameter}\\
+    \bm Z|\alpha & \sim & \text{IBP}(\alpha)\\
+          \alpha & \sim & \text{Gamma}(a,b), \text{where $b$ is the scale parameter}\\
     & & \\
     p(\alpha|\bm Z) & \propto & p(\bm Z|\alpha) p(\alpha)\\
     p(\alpha|\bm Z) & \propto & \alpha^{K_+} e^{-\alpha H_N}  
@@ -238,7 +245,7 @@ Note that a conjugate prior for $\alpha$ is a Gamma distribution.
   \end{array}
 \]
 \begin{equation}
-  \alpha|\bm Z  \sim  Gamma(a+K_+, (1/b+H_N)^{-1})
+  \alpha|\bm Z  \sim  \text{Gamma}(a+K_+, (1/b+H_N)^{-1})
 \end{equation}
 
 %\subsection{Distance Dependent Indian Buffet Process}
