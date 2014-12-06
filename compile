@@ -1,6 +1,6 @@
 #!/bin/bash
 
 pdflatex main.tex
-#rm -f *.log *.aux *.out *.snm *.toc
-#rm -f *.log
 firefox main.pdf &
+
+# I need 2 pdflatex, 1 bibtex, pdflatex.
