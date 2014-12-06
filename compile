@@ -11,6 +11,5 @@ unset GLOBIGNORE
 
 firefox main.pdf &
 
-
 # I need 2 pdflatex, 1 bibtex, pdflatex.
 # bibtex main.aux
