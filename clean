@@ -3,5 +3,6 @@
 #fs="$(ls main.!(tex))"
 #rm $fs
 #echo $fs
-GLOBALIGNORE=*.tex
+GLOBIGNORE=main.tex
 rm main.*
+unset GLOBIGNORE
