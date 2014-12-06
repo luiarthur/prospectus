@@ -1,6 +1,16 @@
 #!/bin/bash
 
 pdflatex main.tex
+bibtex main.aux
+pdflatex main.tex
+pdflatex main.tex
+
+GLOBIGNORE=main.tex:main.pdf
+rm main.*
+unset GLOBIGNORE
+
 firefox main.pdf &
 
+
 # I need 2 pdflatex, 1 bibtex, pdflatex.
+# bibtex main.aux

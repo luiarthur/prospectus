@@ -1,8 +1,0 @@
-#!/bin/bash
-
-#fs="$(ls main.!(tex))"
-#rm $fs
-#echo $fs
-GLOBIGNORE=main.tex
-rm main.*
-unset GLOBIGNORE
