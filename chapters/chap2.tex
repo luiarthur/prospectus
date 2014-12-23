@@ -358,10 +358,43 @@ created by the ten students.
 
 
 \section{Distance Dependent Indian Buffet Process}
-%Currently, there exists a distance dependent Indian buffet process (dd-IBP), 
-%constructed by Gershman, Frazier, and Blei (2012). We wish to create a model 
-%similar to it. We will first review the ddIBP.
+Currently, there exists a distance dependent Indian buffet process (dd-IBP), 
+constructed by \cite{ddibp}. We wish to create a model 
+similar to it. We will first review the ddIBP. \\
 
+\noindent
+In the ddIBP, following the same analogy as in the IBP, two customers that are
+``closer" together in a given distance metric are more likely to share the same
+dishes (features). This is different from the IBP as new customers do not take
+new dishes according to their popularity. Terminolofy and notation for the ddIBP
+will here be introduced:
+
+\begin{enumerate}
+  \item Dishes (columns of $\bm Z$) are identified by the natural numbers 
+        $\mathbb{N}$
+
+  \item $\mathcal{K}_i$: The set of dishes owned by customer $i$
+  \begin{itemize}
+    \item $\mathcal{K}_i \subset \mathbb{N}$
+    \item $\mathcal{K}_i \cap \mathcal{K}_j = \o$, for $i \ne j$
+    \item $\lambda_i = |\mathcal{K}_i|$
+    \item $K = \suml{i}{1}{N} \lambda_i$ 
+    \item $K_{-i} = \cup_{j \ne i}K_j$
+  \end{itemize}
+
+  \item $\bm C$: The connectivity matrix, which indicates how customers are
+                 ``linked" to each other by dishes
+  \begin{itemize}
+    \item $c_{ik} = j \implies$ customer $i$ connects to customer $j$ through
+          dish $k$
+  \end{itemize}
+
+  \item $\bm{c^*}$: The ownership vector, $\bm{c_k^*} \in \{1,...,N\}$ indicates
+                   the owner of dish $k$
+  \begin{itemize}
+    \item $\bm{c_k^*}=i \implies k \in \mathcal{K}_i$
+  \end{itemize}
+\end{enumerate}
 
 
 
