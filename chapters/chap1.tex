@@ -7,7 +7,20 @@ infinite dimensions. Specifically, we want to extend the Indian buffet Process
 to include distance information between observations. \\
 
 \noindent
-The Indian buffet process provides a distribution for binary matrices of infinite
-dimensions. 
+The Indian buffet process (IBP) provides a distribution for binary matrices of
+infinite dimensions. They are a good choice of prior distribution for feature
+matrices in infinite latexnt feature models, as their dimensions can be learned
+from the data and do not have to be predetermined.\\
 
+\noindent
+Implementations of the IBP to include distance information have been studied and
+introduced by authors such as \cite{ddibp}. The distance-dependent Indian buffet
+process (ddIBP) is one such implementation. It reduces to the regular IBP under
+certain conditions, and preserves many of the properties of the IBP. We are 
+interested in proposing a new distribution which makes use of attraction information
+that \cite{epa} uses in his Ewen-Pitman attraction (EPA) distribution. We
+also wish to make a comparison between the ddIBP and the proposed distribution.
+We hope to preserve as many features of the IBP as possible. The proposed 
+distribution will also have a p.m.f which does not require the enumeration of all
+possible connectivity matrices and ownership vectors, as in the ddIBP.
 

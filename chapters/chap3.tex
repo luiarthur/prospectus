@@ -11,6 +11,21 @@ distribution we are proposing will incorporate a measure of attraction similar
 to in the EPA distribution. We will also develop a method to sample from the
 distribution and make posterior inference. \\
 
+\noindent
+The p.m.f for $\bm Z$ in the ddIBP involves the enumeration of all possible sets
+of connectivity matrices and ownership vectors that generates the same $\bm Z$ 
+matrix. This becomes infeasible very quickly as the dimensions of $\bm Z$ 
+increases. Evaluating the p.m.f, therefore, cannot be done except for smaller
+dimensions of $\bm Z$, and typical metropolis-hastings algorithms based just on 
+the likelihood and prior, cannot be conveniently implemented.\\
+
+\noindent
+The new distribution we will propose will incorporate attraction information to
+determine how customers are connected by dishes. It will also preserve properties 
+of the original IBP, such as expected number of dishes drawn by each customer,
+expected number of dishes drawn in total, and expected sum of the $\bm Z$ matrix.
+
+
 % What are the applications of such a distribution?
 % What are the values of having such a distrubition?
 
