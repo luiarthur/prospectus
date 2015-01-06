@@ -188,8 +188,7 @@ $\bm Z$, and $K_1^{(i)}$ is the ``number of new dishes" sampled by customer $i$.
 \subsection{Gibbs Sampler for Indian Buffet Process}
 One way to get a draw from the IBP($\alpha$) is to simulate the process
 according to the description above. Another way is to implement a Gibbs
-sampler. We can use a Gibbs sampler to obtain the posterior distribution, given
-a likelihood. We can implement a Gibbs sampler to draw from the IBP as follows:
+sampler. We can implement a Gibbs sampler to draw from the IBP as follows:
 
 \begin{enumerate}
   \item Start with an arbitrary binary matrix of $N$ rows
@@ -203,15 +202,15 @@ a likelihood. We can implement a Gibbs sampler to draw from the IBP as follows:
   \end{enumerate}
   \item iterate step 2 a large number of times
 \end{enumerate}
-We can likewise incorporate this Gibbs sampler to sample from the posterior distribution P($\bm{Z|X}$)
-where $\bm Z \sim \text{IBP}(\alpha)$ by sampling from the complete conditional
+We can likewise incorporate this Gibbs sampler to sample from the posterior
+distribution P($\bm{Z|X}$) where $\bm Z \sim \text{IBP}(\alpha)$ by sampling
+from the complete conditional
 \begin{equation}
   P(z_{ik}=1|\bm{Z_{-(ik)},X})  \propto p(\bm{X|Z}) P(z_{ik}=1|\bm{Z_{-(ik)}}).
-\end{equation}\\
-
+\end{equation}
 
 \noindent
-The parameter $\alpha$ is often unknown, so it should be modeled. Note that a
+The parameter $\alpha$ is often unknown, so it should be modeled. Note that the
 conjugate prior for $\alpha$ is a Gamma distribution. Using a Gamma
 distribution is appropriate since $\alpha$ is positive.
 \[

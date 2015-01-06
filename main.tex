@@ -13,6 +13,7 @@
 \usepackage{appendix}                                                     %
 \usepackage[UKenglish]{isodate} % for: \today                             %
 \cleanlookdateon                % for: \today                             %
+\usepackage{paralist} % compactenum
                                                                           %
 \def\wl{\par \vspace{\baselineskip}\noindent}                             %
 \def\beginmyfig{\begin{figure}[htbp]\begin{center}}                       %
@@ -28,6 +29,11 @@
 \def\lb{\left \{ }
 \def\rb{\right \}}
 \def\o{\emptyset}
+
+% Compactenum:
+\renewenvironment{itemize}[1]{\begin{compactitem}#1}{\end{compactitem}}
+\renewenvironment{enumerate}[1]{\begin{compactenum}#1}{\end{compactenum}}
+\renewenvironment{description}[0]{\begin{compactdesc}}{\end{compactdesc}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\title{Infinite Latent Feature Models Indexed by \titlebreak 
