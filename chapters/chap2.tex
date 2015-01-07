@@ -170,9 +170,12 @@ IBP(10) with 50 rows. The white squares are 1, indicating that a dish was
 taken; black squares are 0, indicating that a dish was not taken. \\
 \beginmyfig
   % Reverse Colors
+  \vspace{-15mm}
   \caption{IBP($N=50$, $\alpha=10$)}
+  \vspace{-10mm}
   %\includegraphics[height=.3 \textwidth]{images/ibp.pdf}
   \includegraphics{images/ibp.pdf}
+  \vspace{-13mm}
 \endmyfig
 
 \noindent
@@ -271,7 +274,7 @@ Figure 2.2 displays the data from the ten students.\\
   \caption{Data From Ten Students}
   \vspace{-2mm}
   \includegraphics{images/Y.pdf}
-  \vspace{-15mm}
+  \vspace{-20mm}
 \endmyfig
 
 \noindent
@@ -295,6 +298,7 @@ execution time was about 4 hours.
 \beginmyfig
   \caption{}
   \includegraphics{images/postAlpha.pdf}
+  \vspace{-10mm}
 \endmyfig
 \noindent
 The number of columns in $\bm Z$ appears to have converged to 9. This means
@@ -321,14 +325,16 @@ Figure 2.7 shows the matrix in $6 \times 6$ form. That is, each row in $\bm A$
 were back-transformed into its matrix form.\\
 
 \beginmyfig
+  \vspace{-5mm}
   \caption{}
   \includegraphics{images/postZ.pdf}
-  \vspace{-10mm}
+  \vspace{-15mm}
 \endmyfig
 
 \beginmyfig
   \caption{}
   \includegraphics{images/postA.pdf}
+  \vspace{-15mm}
 \endmyfig
 \beginmyfig
   \caption{The latent features turned back into $6 \times 6$ images.}
@@ -373,10 +379,15 @@ will here be introduced:
   \item $\mathcal{K}_i$: The set of dishes owned by customer $i$
   \begin{itemize}
     \item $\mathcal{K}_i \subset \mathbb{N}$
-    \item $\mathcal{K}_i \cap \mathcal{K}_j = \o$, for $i \ne j$
-    \item $\lambda_i = |\mathcal{K}_i|$
-    \item $K = \suml{i}{1}{N} \lambda_i$ 
-    \item $K_{-i} = \cup_{j \ne i}K_j$
+    \item $\mathcal{K}_i \cap \mathcal{K}_j = \o$, for $i \ne j$, i.e. the sets, 
+                                                   representing the dishes that 
+                                                   different customers own,are
+                                                   disjoint
+    \item $\lambda_i = |\mathcal{K}_i|$, the number of dishes owned
+                                         by customer $i$
+    \item $K = \suml{i}{1}{N} \lambda_i$, the total number of owned dishes 
+    \item $K_{-i} = \cup_{j \ne i}K_j$, the set of all owned dishes excluding those
+                                        of customer $i$
   \end{itemize}
 
   \item $\bm C$: The N $\times $ K connectivity matrix, which indicates how 
