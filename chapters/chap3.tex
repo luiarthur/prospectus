@@ -8,10 +8,10 @@ We will propose a distribution for infinitely sparse matrices, incorporating
 distance information. Though Frazier and Blei have defined the distance
 dependent Indian buffet process (ddIBP), the distribution we are proposing will
 incorporate a measure of attraction similar to in the EPA distribution. We will
-perform some simulations to explore properties of the proposed distribution.
-Time permitting, we will also develop a method to sample from the distribution
-and make posterior inference, and explore the theoretical properties of and
-applcations of the proposed distribution. \\
+perform simulations to explore and compare the properties of the proposed
+distribution and the ddIBP. Time permitting, we will also develop an MCMC
+method to make posterior inference, and explore the theoretical properties of
+and applications of the proposed distribution. \\
 
 \noindent
 The p.m.f for $\bm Z$ in the ddIBP involves the enumeration of all possible sets
@@ -19,7 +19,8 @@ of connectivity matrices and ownership vectors that generates the same $\bm Z$
 matrix. This becomes infeasible very quickly as the dimensions of $\bm Z$ 
 increases. Evaluating the p.m.f, therefore, cannot be done except for smaller
 dimensions of $\bm Z$, and typical metropolis-hastings algorithms based just on 
-the likelihood and prior, cannot be conveniently implemented.\\
+the likelihood and prior, cannot be conveniently implemented. We suspect that
+we can write a p.m.f. in closed form for the proposed distribution.\\
 
 \noindent
 The new distribution we will propose will incorporate attraction information to
