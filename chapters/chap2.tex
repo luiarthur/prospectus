@@ -265,8 +265,8 @@ image, Gaussian noise (mean=0, variance=.25) was added to each cell of the
 binary image. Gaussian noise was added to the same image to generate 10 $6
 \times 6$ images. These images were turned into $1 \times 36$ row vectors. All
 these vectorized images were stacked together to form one large $100 \times 36$
-matrix. (Note that I did not know the design of these images before hand. The
-images could be letters, numbers, interesting patterns, etc.)
+matrix. (Note that the design of these images were not known beforehand. The
+images could be letters, numbers, various patterns, etc.)
 Figure 2.2 displays the data from the ten students.\\
 
 \beginmyfig
@@ -282,14 +282,14 @@ A Gibbs sampler was implemented to retrieve posterior distributions for $\bm
 Z$, $\bm A$, and $\alpha$. The mass parameter$\alpha$ was initially set to $1$,
 and the posterior for $\alpha$ was obtained by equation (3) with prior
 distribution $Gamma(3,2)$.  The parameters were chosen such that $\alpha$ was
-centered at 6 and had a variance of 12, as I believed I may have many latent
-features, but my uncertainty was high.  Equation(2) was used to retrieve the
-posterior distribution for $\bm Z$ (a collection of binary matrices). After
-5000 iterations, the trace plot for the number of columns in the binary
-matrices drawn were plotted (See Figure 2.3). Diagnostics for a cell by cell
-trace plot could also be plotted, but may be too difficult to analyze as the
-dimensions of the matrices are changing, and the matrices are large. The
-execution time was about 4 hours.
+centered at 6 and had a variance of 12, because it is probable that there are
+many latent features.  Equation(2) was used to retrieve the posterior
+distribution for $\bm Z$ (a collection of binary matrices). After 5000
+iterations, the trace plot for the number of columns in the binary matrices
+drawn were plotted (See Figure 2.3). Diagnostics for a cell by cell trace plot
+could also be plotted, but may be too difficult to analyze as the dimensions of
+the matrices are changing, and the matrices are large. The execution time was
+approximately 4 hours.
 \beginmyfig
   \caption{}
   \includegraphics{images/traceplot.pdf}
@@ -312,7 +312,7 @@ plot (Figure 2.3), we see that after burn-in, there is one instance where the
 number of columns in $\bm Z$ was $10$.  One instance out of 4000 is not
 significantly large enough to say that \textit{that} latent feature is 
 generating the observed data. So, the tenth column was removed. The resulting
-matrix, I will call the posterior mean for $\bm Z$.  The trace plot for
+matrix, will be referred to as the posterior mean for $\bm Z$. The trace plot for
 $\alpha$ (Figure 2.4) shows that $\alpha$ appears to have converged, with mean
 $=2.08$ and variance $=.359$.  Figure 2.5 shows the posterior mean for $\bm Z$.
 We can interpret the matrix in the following way. All the observations are 
