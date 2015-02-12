@@ -22,6 +22,7 @@
 %\def\suml{\sum\limits_{i=1}^n}                                           %
 \def\prodl#1#2#3{\prod\limits_{#1=#2}^{#3}}                               %
 \def\suml#1#2#3{\sum\limits_{#1=#2}^{#3}}                                 %
+\def\sums#1#2#3{\sum\limits_{#1:#2}^{#3}}                                 
 \def\ds{\displaystyle}                                                    %
 \def\piano#1#2#3#4{\frac{\ds #1}{\ds\int_{#2}^{#3}#1 d#4}}                %
 \def\mleStart#1#2{\mathcal{L}(#2|\bm{#1}) &=& \prodl f(#1_i|#2)}          %
@@ -29,6 +30,8 @@
 \def\lb{\left \{ }
 \def\rb{\right \}}
 \def\o{\emptyset}
+\def\hik{\ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
+        {\suml{k}{1}{y_i}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}}
 
 % Compactenum:
 \renewenvironment{itemize}[1]{\begin{compactitem}#1}{\end{compactitem}}
@@ -57,6 +60,7 @@
 \input chapters/chap1.tex
 \input chapters/chap2.tex
 \input chapters/chap3.tex
+\input chapters/chap4.tex
 %\cite{ansc:1964}
 %\cite{audi:clav:1997}
 
