@@ -70,9 +70,28 @@ Let:
 
 
 \section{Simulation Study}
+A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine the
+behavior of the AIBP \footnote{The simulation study can be accessed by installing 
+and loading the ``shiny" package in R, then running the line: \\
+> runGitHub(`shinyTest',`luiarthur')\\}. 
 % Provide link to code of simulation.
 
 \section{Comparisons between the AIBP \& ddIBP}
+One obvious difference between the AIBP and ddIBP is that the pmf for any given 
+binary matrix can be evaluated for the AIBP, while the pmf cannot be explicitly 
+computed. For both the AIBP and ddIBP, expected row sums for a given parameter
+$\alpha$ is $\alpha$, which is also the expected row sum for the IBP($\alpha$). 
+The expected number of non-zero columns in the AIBP is $\alpha H_N$, which is also
+the expected number of non-zero columns in the IBP. This is because in the AIBP,
+the process for each ``customer" drawing new dishes is the same as in the IBP. This
+equality does not hold for the ddIBP. In general, expected column sums are not
+equal to the IBP, for both the AIBP and ddIBP. However, the expected matrix
+sums for both the AIBP and ddIBP are the same as that of the IBP. The table below 
+summarizes these findings. One implication of this result is that the AIBP 
+preserves the dimensions of the IBP, but redistributes ``dishes" to each customer
+based on proximity to other customers. The ddIBP does not preserve the dimensions
+of the IBP in this manner. 
+
 % Closed form pmf
 % E[#columns]
 % E[rowsum] all equal
@@ -82,12 +101,11 @@ Let:
   \begin{tabular}{c|c|c}
     \hline
       Comparison & AIBP & ddIBP \\ \hline \hline
-      Closed form pmf & Yes & No \\ \hline
       Explicit pmf & Yes & No \\ \hline
       Expected non-zero columns equal to that of IBP & Yes & No \\ \hline
-      Expected row sums equal to that of IBP & No & Yes \\ \hline
+      Expected row sums equal to that of IBP & Yes & Yes \\ \hline
       Expected column sums equal to that of IBP & No & No \\ \hline
-      Expected matrix sum equal to that of IBP & No & Yes \\ \hline
+      Expected matrix sum equal to that of IBP & Yes & Yes \\ \hline
     \hline
   \end{tabular}
 \end{center}
