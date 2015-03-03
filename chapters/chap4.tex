@@ -33,11 +33,12 @@ Let:
   \item $x_i$ = the number of \textit{new} dishes that customer $i$ draws.
 
   \item $y_{-i} = \suml{j}{1}{i-1} x_j$, the number of existing dishes
-        before customer $i$ draws new dishes.
+        before customer $i$ draws new dishes, for $i=\{2,...,N\}$. We will
+        define $y_{-i} = 0$.
 
   \item $g_i(x_i) = \ds\frac{(\alpha/i)^{x_i}\exp(-\alpha/i)}{x_i!}$, 
         which is the probability mass function for a Poisson distribution 
-        with parameter $\alpha/i$ and argument $x_i$.\\
+        with parameter $\alpha/i$ and argument $x_i$.
 
   \item $K$ = the number of (non-zero) columns in $\bm Z$.
 
@@ -49,14 +50,16 @@ Let:
 
   \item $h_{i,k} = \ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
         {\suml{k}{1}{y_i}\left(\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)
-         \right)}$
+         \right)}$, the weight given to dish $k$ for customer $i$. \\
 
-  \item $p_{i,k} = h_{i,k} \ds\frac{m_{-i}}{i}$
+  \item $p_{i,k} = h_{i,k} \ds\frac{m_{-i}}{i}$, the probability of customer
+        $i$ drawing dish $k$. Note that when $\lambda$ is a constant, $p_{i,k}$
+        reduces to $m_{-i,k}$ as in the IBP.
   %\item $h(i) = \prodl{k}{1}{y_{-i}} 
   %      (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}$, for $i>1$,
   %      and $1$ for $i=1$.
 
-  \item $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$.
+  \item $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$, the harmonic number.
 \end{itemize}
 
 
@@ -69,10 +72,13 @@ $\alpha$ is a mass parameter that governs the number of dishes that will be draw
 The larger $\alpha$ is, the larger the number of total dishes drawn ($K$) will be.\\
 
 \noindent
-The first customer draws an $x_1=$ Poisson($\alpha$) number of dishes. This is
-indicated by setting $z_{1,1:x_1}$ to $1$. For each subsequent customer $i$, 
-if there exists any previously sampled dishes (i.e. if ), customer $i$ samples dish
-  
+To obtain a realization $\bm Z$ from an AIBP($\alpha$), the first customer
+draws an $x_1 \sim$ Poisson($\alpha$) number of dishes. This is indicated by
+setting $z_{1,1:x_1}$ to $1$. For each subsequent customer $i$, if there exists
+any previously sampled dishes (i.e. if $y_{-i}>0$), customer $i$ samples dish $k$
+with probability $\left(h_{i,k}\right)$, for $k \in \{1,...,y_{-i}\}$. The customer
+then samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes. 
+
 %\begin{itemize}
 %  \item The first customer draws an $x_1=$ Poisson($\alpha$) number of dishes. This
 %        is indicated by setting $z_{1,1:x_1}$ to $1$.
@@ -87,6 +93,11 @@ if there exists any previously sampled dishes (i.e. if ), customer $i$ samples d
 
 
 \section{Probability Mass Function}
+Based on the sampling algorithm above, we can write down the p.m.f. for the
+proposed distribution as a product of independent probabilities for 
+each customer and for each dish. Note that here we will define 
+$\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.
+
 \begin{align*}
   \text{P}(\bm Z|\bm\sigma)
   =&\prodl{i}{1}{N} \left\{g_i(x_i) \prodl{k}{1}{y_{-i}} 
@@ -101,8 +112,9 @@ if there exists any previously sampled dishes (i.e. if ), customer $i$ samples d
     &\left( \prodl{i}{1}{N}\prodl{k}{1}{y_{-i}} 
     \ds\frac{\left(\hik m_{-i}\right)^{z_{i,k}}
              \left(i-\hik m_{-i}\right)^{1-z_{i,k}}}{i} \right)\\
-  =&\ds\frac{\alpha^K \exp(-\alpha H_N)} {\prodl{i}{1}{N}x_i!} 
-    \left( \prodl{i}{2}{N} i^{-x_i-y_{-i}}\prodl{k}{1}{y_{-i}} 
+  =&\ds\frac{\alpha^K \exp(-\alpha H_N)} {\prodl{i}{1}{N}x_i!} \times
+    \\
+    &\left( \prodl{i}{2}{N} i^{-x_i-y_{-i}}\prodl{k}{1}{y_{-i}} 
     \ds\frac{
     \left(\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)m_{-i}\right)^{z_{i,k}}
     \left(i-\sums{\sigma}{z_{-i,k}=1}{}
@@ -111,12 +123,30 @@ if there exists any previously sampled dishes (i.e. if ), customer $i$ samples d
     {\suml{k}{1}{y_{-i}}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}\right)
 \end{align*}
 
+\section{Properties of the AIBP}
+One of the properties we wished to preserve from the IBP was that the expected
+number of dishes taken by each customer would be $\alpha$. The algorithm prescribed
+above allocates dishes to customer based on their proximity to other customers. 
+That is if two customers are close together, they are more likely to share the
+same dishes. 
+% Properties:
+%1
+%Note that the mechanism for drawing new dishes is the same as that for the IBP. 
+%So the expected total number of dishes drawn, which is the total number of 
+%non-zero columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in
+%the IBP. 
+%2: E[row sum] = a
+
+
+
 
 \section{Simulation Study}
 A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine the
 behavior of the AIBP \footnote{The simulation study can be accessed by installing 
 and loading the ``shiny" package in R, then running the line: \\
-> runGitHub(`shinyTest',`luiarthur')\\}. 
+> runGitHub(`shinyTest',`luiarthur')\\\\
+And the code for the simulation study can be viewed at: \\
+github.com/luiarthur/shinyTest}. 
 
 \section{Comparisons between the AIBP \& ddIBP}
 One obvious difference between the AIBP and ddIBP is that the pmf for any given 
