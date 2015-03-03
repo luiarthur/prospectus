@@ -125,22 +125,32 @@ $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0
 
 \section{Properties of the AIBP}
 One of the properties we wished to preserve from the IBP was that the expected
-number of dishes taken by each customer would be $\alpha$. The algorithm prescribed
-above allocates dishes to customer based on their proximity to other customers. 
-That is if two customers are close together, they are more likely to share the
-same dishes. 
-% Properties:
-%1
-%Note that the mechanism for drawing new dishes is the same as that for the IBP. 
-%So the expected total number of dishes drawn, which is the total number of 
-%non-zero columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in
-%the IBP. 
-%2: E[row sum] = a
-
-
-
+number of dishes taken by each customer would be $\alpha$. The algorithm
+prescribed above allocates dishes to customer based on their proximity to other
+customers.  That is if two customers are close together, they are more likely
+to share the same dishes. The number of new dishes sampled by each customer in
+the AIBP is the same as that in the IBP, by construction. So it remains to show
+that the expected number of previously-sampled dishes $r_i$ sampled by by
+customer $i$ in the AIBP is the same as that in the IBP. In the IBP, the
+expected row sum for the first row is $\alpha$, which is the same as in the
+AIBP. So the expected row sum is the same for the first row. For subsequent
+rows, the expected value of $r_i$ in the IBP is E$\left[\suml{k}{1}{y_{-i}}
+\frac{m_{-i,k}}{i}\right]$ = $\frac{m_{-i}}{i}$.  For the AIBP,
+the expected value of $r_i$ is:
+\[
+  E\left[\suml{k}{1}{y_{-i}}\hik \frac{m_{-i}}{i}\right] = \frac{m_{-i}}{i}
+\]
+So, the expected row sums are the same for the AIBP and IBP. Note also that
+since the mechanism for drawing new dishes is the same as that for the IBP, the
+expected total number of dishes drawn, which is the total number of non-zero
+columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in the IBP. 
+The implication is that the effective dimensions of the IBP are preserved in the
+IBP, but the allocation of dishes to customers is influenced by distance 
+information.\\
 
 \section{Simulation Study}
+% Are observations close together really going to share the same dishes?
+% Are distant observations going to disshare dishes?
 A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine the
 behavior of the AIBP \footnote{The simulation study can be accessed by installing 
 and loading the ``shiny" package in R, then running the line: \\
