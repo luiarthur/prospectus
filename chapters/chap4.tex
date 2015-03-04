@@ -95,7 +95,7 @@ then samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes.
 \section{Probability Mass Function}
 Based on the sampling algorithm above, we can write down the p.m.f. for the
 proposed distribution as a product of independent probabilities for 
-each customer and for each dish. Note that here we will define 
+each customer and for each dish. Here we will define 
 $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.
 
 \begin{align*}
@@ -109,9 +109,10 @@ $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0
   =&\ds\frac{\alpha^{\suml{i}{1}{N}x_i} \exp(-\alpha H_N)} {\prodl{i}{1}{N}x_i!} 
     \left( \prodl{i}{1}{N}i^{-x_i} \right) \times
     \\
-    &\left( \prodl{i}{1}{N}\prodl{k}{1}{y_{-i}} 
-    \ds\frac{\left(\hik m_{-i}\right)^{z_{i,k}}
-             \left(i-\hik m_{-i}\right)^{1-z_{i,k}}}{i} \right)\\
+    &\left( \prodl{i}{1}{N}\prodl{k}{1}{y_{-i}} i^{-1}
+    \ds\left(\hik m_{-i}\right)^{z_{i,k}}
+       \left(i-\hik m_{-i}\right)^{1-z_{i,k}} \right)\\
+   &\\
   =&\ds\frac{\alpha^K \exp(-\alpha H_N)} {\prodl{i}{1}{N}x_i!} \times
     \\
     &\left( \prodl{i}{2}{N} i^{-x_i-y_{-i}}\prodl{k}{1}{y_{-i}} 
@@ -124,6 +125,11 @@ $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0
 \end{align*}
 
 \section{Properties of the AIBP}
+In the literature review, it was shown how each of the distributions that made
+use of pairwise distance information could be reduced to the original
+distributions (CRP and IBP). The AIBP can likewise be reduced to the IBP when
+the similarity function is constant.\\
+\noindent
 One of the properties we wished to preserve from the IBP was that the expected
 number of dishes taken by each customer would be $\alpha$. The algorithm
 prescribed above allocates dishes to customer based on their proximity to other
@@ -135,10 +141,11 @@ customer $i$ in the AIBP is the same as that in the IBP. In the IBP, the
 expected row sum for the first row is $\alpha$, which is the same as in the
 AIBP. So the expected row sum is the same for the first row. For subsequent
 rows, the expected value of $r_i$ in the IBP is E$\left[\suml{k}{1}{y_{-i}}
-\frac{m_{-i,k}}{i}\right]$ = $\frac{m_{-i}}{i}$.  For the AIBP,
-the expected value of $r_i$ is:
+\frac{m_{-i,k}}{i}\right]$ = E$\left[\frac{m_{-i}}{i}\right]$ =
+$\frac{\alpha(i-1)}{i}$. For the AIBP, the expected value of $r_i$ is:
 \[
-  E\left[\suml{k}{1}{y_{-i}}\hik \frac{m_{-i}}{i}\right] = \frac{m_{-i}}{i}
+  E\left[\suml{k}{1}{y_{-i}}\hik \frac{m_{-i}}{i}\right] = 
+  E\left[\frac{m_{-i}}{i}\right] = \frac{\alpha(i-1)}{i}
 \]
 So, the expected row sums are the same for the AIBP and IBP. Note also that
 since the mechanism for drawing new dishes is the same as that for the IBP, the
@@ -151,28 +158,28 @@ information.\\
 \section{Simulation Study}
 % Are observations close together really going to share the same dishes?
 % Are distant observations going to disshare dishes?
-A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine the
-behavior of the AIBP \footnote{The simulation study can be accessed by installing 
-and loading the ``shiny" package in R, then running the line: \\
+A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine
+the behavior of the AIBP \footnote{The simulation study can be accessed by
+installing and loading the ``shiny" package in R, then running the line: \\
 > runGitHub(`shinyTest',`luiarthur')\\\\
-And the code for the simulation study can be viewed at: \\
+The code for the simulation study can be viewed at: \\
 github.com/luiarthur/shinyTest}. 
 
 \section{Comparisons between the AIBP \& ddIBP}
-One obvious difference between the AIBP and ddIBP is that the pmf for any given 
-binary matrix can be evaluated for the AIBP, while the pmf cannot be explicitly 
+One obvious difference between the AIBP and ddIBP is that the pmf for any given
+binary matrix can be evaluated for the AIBP, while the pmf cannot be explicitly
 computed. For both the AIBP and ddIBP, expected row sums for a given parameter
-$\alpha$ is $\alpha$, which is also the expected row sum for the IBP($\alpha$). 
-The expected number of non-zero columns in the AIBP is $\alpha H_N$, which is also
-the expected number of non-zero columns in the IBP. This is because in the AIBP,
-the process for each ``customer" drawing new dishes is the same as in the IBP. This
-equality does not hold for the ddIBP. In general, expected column sums are not
-equal to the IBP, for both the AIBP and ddIBP. However, the expected matrix
-sums for both the AIBP and ddIBP are the same as that of the IBP. The table below 
-summarizes these findings. One implication of this result is that the AIBP 
-preserves the dimensions of the IBP, but redistributes ``dishes" to each customer
-based on proximity to other customers. The ddIBP does not preserve the dimensions
-of the IBP in this manner. \\
+$\alpha$ is $\alpha$, which is also the expected row sum for the IBP($\alpha$).
+The expected number of non-zero columns in the AIBP is $\alpha H_N$, which is
+also the expected number of non-zero columns in the IBP. This is because in the
+AIBP, the process for each ``customer" drawing new dishes is the same as in the
+IBP. This equality does not hold for the ddIBP. In general, expected column
+sums are not equal to the IBP, for both the AIBP and ddIBP. However, the
+expected matrix sums for both the AIBP and ddIBP are the same as that of the
+IBP. The table below summarizes these findings. One implication of this result
+is that the AIBP preserves the dimensions of the IBP, but redistributes
+``dishes" to each customer based on proximity to other customers. The ddIBP
+does not preserve the dimensions of the IBP in this manner. \\
 
 \begin{center}
   \begin{tabular}{c|c|c}
@@ -184,6 +191,8 @@ of the IBP in this manner. \\
       Expected column sums equal to that of IBP & No & No \\ \hline
       Expected matrix sum equal to that of IBP & Yes & Yes \\ \hline
     \hline
+    \caption{Table 1: Comparisons of the AIBP to the ddIBP showing how what
+                      properties of the IBP they presrve.}
   \end{tabular}
 \end{center}
 
