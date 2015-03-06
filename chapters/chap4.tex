@@ -1,20 +1,20 @@
 \chapter{Research Results}
 In this chapter, we will discuss the results of the research. We will discuss
 the sampling algorithm for the Attraction Indian buffet process (AIBP) and
-derive the p.m.f. of the distribution. Using a simulation study, we will also
+derive the p.m.f. of the distribution. Through a simulation study, we will also
 compare the properties of the IBP, AIBP, and ddIBP.\\
 
 \section{Notation for the AIBP}
 Before discussing the sampling algorithm and the p.m.f. for the AIBP,  we will
-discuss the notation that will be used. In this chapter, the term ``customer"
-will be used to refer to a row (or observation) in a dataset; the term ``dish"
+present the notation that will be used. In this chapter, the term ``customer"
+will be used to refer to a row (or an observation) in a dataset; the term ``dish"
 will likewise be used to refer to a column in a dataset. The terminology used
 here is consistent with that used in the IBP and ddIBP.\\
 
 \noindent
 The order of customers in the dataset is not necessarily the order that the
 observations will be assigned dishes in implementation. We will call $\bm
-\sigma = (\sigma_1,..\sigma_n)$ the permutation of \textit{permutation} of the
+\sigma = (\sigma_1,..,\sigma_n)$ the permutation of \textit{permutation} of the
 data. The permutation gives the sequence in which the n customers are assigned
 dishes, where the $t^{th}$ customer assigned is $\sigma_t$. Note that $\bm
 \sigma = {1,...,n}$ when the customers are assigned in the order they appear
@@ -43,16 +43,14 @@ customer $i$ samples dishes. We will let  $m_{-i} = \suml{k}{1}{K}m_{-i,k}$ be
 the total number of dishes taken before customer $i$ samples any dishes.  We
 will assign 
 \[h_{i,k} = \hik,\]
-the weight given to sampling dish $k$ for
-customer $i$. The probability of customer $i$ drawing dish $k$ will be $p_{i,k}
-= h_{i,k} \ds\frac{m_{-i}}{i}$. Note that when $\lambda$ is a constant,
-$p_{i,k}$ reduces to $m_{-i,k}$ as in the IBP. We will define the harmonic
-number to be $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$.
+the similarity component of the weight given to sampling dish $k$ for customer
+$i$. The probability of customer $i$ drawing dish $k$ will be $p_{i,k} =
+h_{i,k} \ds\frac{m_{-i}}{i}$. Note that when $\lambda$ is a constant, $p_{i,k}$
+reduces to $m_{-i,k}$ as in the IBP. We will define $H_N = \suml{i}{1}{N}
+\ds\frac{1}{i}$ to be the harmonic number.
 %$h(i) = \prodl{k}{1}{y_{-i}} 
 %(p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}$, for $i>1$,
 %and $1$ for $i=1$.
-
-
 
 \section{Sampling Algorithm for the AIBP}
 We will now introduce the sampling algorithm for the AIBP for a given
@@ -86,8 +84,7 @@ samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes.
 Based on the sampling algorithm above, we can write down the p.m.f. for the
 proposed distribution as a product of probabilities for each customer taking
 each dish. Here we will define one more quantity:
-$\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.\\
-
+$\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.
 \begin{align*}
   \text{P}(\bm Z|\bm\sigma)
   =&\prodl{i}{1}{N} \left\{g_i(x_i) \prodl{k}{1}{y_{-i}} 
@@ -116,7 +113,7 @@ $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0
     }
     %{\suml{k}{1}{y_{-i}}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}\right)
     {\suml{k}{1}{y_{-i}}\suml{j}{1}{i-1}\lambda(\sigma_j,\sigma_i)z_{j,k}}\right)
-\end{align*}\\
+\end{align*}
 
 \section{Properties of the AIBP}
 In the literature review, it was shown how each of the mentioned distributions
@@ -147,17 +144,18 @@ expected value of $r_i$ is:
 Therefore, the expected row sums are the same for the AIBP and IBP. Note also
 that since the mechanism for drawing new dishes is the same as that for the
 IBP, the expected total number of dishes drawn, which is the total number of
-non-zero columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in
-the IBP.  The implication is that the effective dimensions of the IBP are
-preserved in the AIBP, but the assignment of dishes to customers is altered
-by distance information.\\
+non-zero columns in $\bm Z$ is $\alpha/1+\alpha/2+...+\alpha/N = \alpha H_N$, as
+in the IBP.  The implication is that the effective dimensions of the IBP are
+preserved in the AIBP, but the assignment of previously-sampled dishes to 
+customers is altered by and redistributed according to distance information.\\
 
 \section{Simulation Study}
 % Are observations close together really going to share the same dishes?
 % Are distant observations going to disshare dishes?
 % What are the next rows going to be, conditioned on the first few rows?
-To better understand the behavior of the AIBP, a simulation study to compare
-the IBP, AIBP, and ddIBP. We are particularly interested in three questions: 
+To better understand the behavior of the AIBP, a simulation study was conducted
+to compare the IBP, AIBP, and ddIBP. We are particularly interested in three
+questions: 
 (1) Do customers that are ``close" together tend to share similar dishes?
 (2) Do customers that are ``far" away from one another tend to not share dishes?
 (3) Given a particular arrangement for the first arbitrary number of customers,
@@ -195,8 +193,8 @@ Figure 4.1).\\
            expected row sums. The numbers at the bottom of the grids are the
            expected column sums.}
 \end{center}\end{figure}
-\noindent
 
+\noindent
 Now we will examine the behavior of the AIBP using the distance matrix given in 
 Table 4.1. This matrix is of particular interest because two pairs of customers
 (1 \& 3, and 2 \& 5) are close together. All other customer pairings are distant.
@@ -222,16 +220,16 @@ The similarity function used is the exponential function.\\
 \noindent
 Figure 4.2 shows the expected value of the IBP, AIBP, and ddIBP simulated with
 $\alpha=1.5$, and the distance matrix $D$ in Table 4.1. The three distributions
-are clearly different. In the AIBP (middle), it is more probable for for the
+are clearly different. In the AIBP (middle), it is more probable for the
 $3^{rd}$ customer to take dish $1$, than it is in the IBP. This is reasonable
 because the first customer tends to take the first dish frequently, and the
-$3^{rd}$ customer is close to the first. In the ddIBP, customer $3$ is more likely
-to take dish $1$ than any other customer. This is the main difference between the 
-behavior of the AIBP and the ddIBP. The ddIBP takes into account the distance 
-information of each customer to every other customer. In the AIBP, the distance 
-information for only customers assigned prior to the current customer is made
-use of. This may not necessarily be a desireable property, but it distinguishes 
-the ddIBP from the AIBP.\\
+$3^{rd}$ customer is close to the first. In the ddIBP, customer $3$ is more
+likely to take dish $1$ than any other customer. This is the main difference
+between the behavior of the AIBP and the ddIBP. The ddIBP takes into account
+the distance information of each customer to every other customer. In the AIBP,
+the distance information for only customers assigned prior to the current
+customer is being made use of. This is neither a  desireable nor an undesireable
+property, but is merely a property that distinguishes the AIBP from the ddIBP.\\
 
 \begin{figure}\begin{center}
   %\includegraphics[height=1\textwidth]{images/postA66.pdf}
@@ -248,14 +246,15 @@ were set to `1'. It is clear that the distance information is respected in both
 the ddIBP and the AIBP. It appears that in the AIBP, customers that are close
 to one another tend to share the same dishes. Customer 3 is close to customer
 1, and consequently takes dishes 1 and 2 more frequently than he would in the
-IBP.  Customer 4 is far away from all other customers. Are more accurately, he
+IBP.  Customer 4 is far away from all other customers. Or more accurately, he
 is equidistant from all other customers. So distance information does not have
 an effect on him. He takes dishes with probabiltiy proportional to their
 popularity, and not proportional to his proximity to customers that have taken
 those dishes. Customer 5 tends to take dishes 3 and 4 because he is close to
 customer 2, who has taken those dishes. In the ddIBP, customers that are far
-apart tend to not share dishes. Instead of taking previously sampled dishes,
-customer 4 samples more new dishes. 
+apart tend to not share dishes. This is observed by noticing that instead of 
+taking previously sampled dishes, customer 4 tends to sample more new dishes,
+because he is far from every other customer. 
 
 \begin{figure}\begin{center}
   %\includegraphics[height=1\textwidth]{images/postA66.pdf}
@@ -269,18 +268,18 @@ customer 4 samples more new dishes.
 \section{Comparisons between the AIBP \& ddIBP}
 One obvious difference between the AIBP and ddIBP is that the pmf for any given
 binary matrix can be evaluated for the AIBP, while the pmf cannot be explicitly
-computed. For both the AIBP and ddIBP, expected row sums for a given parameter
-$\alpha$ is $\alpha$, which is also the expected row sum for the IBP($\alpha$).
-The expected number of non-zero columns in the AIBP is $\alpha H_N$, which is
-also the expected number of non-zero columns in the IBP. This is because in the
-AIBP, the process for each ``customer" drawing new dishes is the same as in the
-IBP. This equality does not hold for the ddIBP. In general, expected column
-sums are not equal to the IBP, for both the AIBP and ddIBP. However, the
-expected matrix sums for both the AIBP and ddIBP are the same as that of the
-IBP. The table below summarizes these findings. One implication of this result
-is that the AIBP preserves the dimensions of the IBP, but redistributes
-``dishes" to each customer based on proximity to other customers. The ddIBP
-does not preserve the dimensions of the IBP in this manner. \\
+computed for the ddIBP. For both the AIBP and ddIBP, expected row sums for a
+given parameter $\alpha$ is $\alpha$, which is also the expected row sum for
+the IBP($\alpha$).  The expected number of non-zero columns in the AIBP is
+$\alpha H_N$, which is also the expected number of non-zero columns in the IBP.
+This is because in the AIBP, the process for each ``customer" drawing new
+dishes is the same as in the IBP. This equality does not hold for the ddIBP. In
+general, expected column sums are not equal to the IBP, for netiher the AIBP and
+ddIBP. However, the expected matrix sums for both the AIBP and ddIBP are the
+same as that of the IBP. Table 4.2 summarizes these findings. One implication
+of this result is that the AIBP preserves the dimensions of the IBP, but
+redistributes ``dishes" to each customer based on proximity to other customers.
+The ddIBP does not preserve the dimensions of the IBP in this manner. \\
 
 \begin{center}
   \begin{tabular}{c|c|c}

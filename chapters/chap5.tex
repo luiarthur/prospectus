@@ -21,14 +21,14 @@ mixed models. The linear mixed model can be written as
 \[
   \bm{y = X\beta + Z\gamma + \epsilon}.
 \]
-Traditionally, $\bm Z$ is a design matrix determined by researchers. The design 
-matrix can consist of random intercepts for each subject in the dataset, and could
-also include random slopes. An interesting application of the IBP could be 
-to model the design matrix $\bm Z$. Though it is usually predetermined, modeling 
-$bm Z$ may be a way of determining latent features (in this case, intercepts) that 
-are generating the observations. If a smaller subset of the observations are
-generating common intercepts for the observations, modeling $\bm Z$ may be of 
+Traditionally, $\bm Z$ is a design matrix determined by researchers. The design
+matrix can consist of random intercepts for each subject in the dataset, and
+could also include random slopes. An interesting application of the IBP could
+be to model the design matrix $\bm Z$ with an IBP prior. Though it is usually
+predetermined, modeling $\bm Z$ may be a way of determining latent features (in
+this case, intercepts) that are generating the observations. If a subset of the
+observations are generating from common intercepts, modeling $\bm Z$ may be of
 value. Adding distance information using the AIBP may be suitable if we know
-that observations that are similar are more likely to share intercepts. However, 
-not formal research has been conducted on this subject, and the application of 
-the IBP in mixed models warrants further investigation.
+that observations that are similar are more likely to share intercepts.
+However, no formal research has been conducted on this subject, and the
+application of the IBP in mixed models warrants further investigation.
