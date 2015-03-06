@@ -31,8 +31,10 @@
 \def\lb{\left \{ }
 \def\rb{\right \}}
 \def\o{\emptyset}
-\def\hik{\ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
-        {\suml{k}{1}{y_i}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}}
+%\def\hik{\ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
+%        {\suml{k}{1}{y_i}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}}
+\def\hik{\ds\frac{\suml{j}{1}{i-1}\lambda(\sigma_j,\sigma_i)z_{j,k}}
+        {\suml{k}{1}{y_i}\suml{j}{1}{i-1}\lambda(\sigma_j,\sigma_i)z_{j,k}}}
 
 % Compactenum:
 \renewenvironment{itemize}[1]{\begin{compactitem}#1}{\end{compactitem}}
