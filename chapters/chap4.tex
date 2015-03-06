@@ -12,55 +12,43 @@ likewise be used to refer to a column in a dataset. This language is also used i
 the IBP and ddIBP.
 
 \noindent
-Let:
-\begin{itemize}
-  \item $\bm \sigma = (\sigma_1,..\sigma_n)$ of ${1,...n}$ gives the sequence
-        in which the n customers are allocated, where the $t^{th}$ customer
-        allocated is $\sigma_t$. We will call $\bm \sigma$ the
-        \textit{permutation} of the data.  The order of customers in the
-        dataset is not necessarily the order that the observations will be
-        allocated in implementation. Note that $\bm \sigma = {1,...,n}$ when 
-        the customers are allocated in the order they appear in the dataset.
+We will call $\bm \sigma = (\sigma_1,..\sigma_n)$ of ${1,...n}$ gives the
+sequence in which the n customers are allocated, where the $t^{th}$ customer
+allocated is $\sigma_t$. We will call $\bm \sigma$ the \textit{permutation} of
+the data.  The order of customers in the dataset is not necessarily the order
+that the observations will be allocated in implementation. Note that $\bm
+\sigma = {1,...,n}$ when the customers are allocated in the order they appear
+in the dataset.\\
+\noindent
+We will call $\lambda(i,j)$ = similarity between customers $i$ and $j$. The
+function $\lambda$ maps the distance between customers to a measure of how
+``close" together the customers are. If $d_{ij}$ represents the distance
+between customers $i$ and $j$, then $\lambda(i,j)=f(d_{ij})$ should be a
+non-decreasing function bounded below by 0. Examples of
+$\lambda(i,j)=f(d_{ij})$ include: (i) reciprocal similarity $f(d) = 1/d$, and
+(ii) exponential similarity $f(d) = exp(-d)$.\\
 
-  \item $\lambda(i,j)$ = similarity between customers $i$ and $j$. The function
-        $\lambda$ maps the distance between customers to a measure of how
-        ``close" together the customers are. If $d_{ij}$ represents the distance
-        between customers $i$ and $j$, then $\lambda(i,j)=f(d_{ij})$ should be a
-        non-decreasing function bounded below by 0. Examples of 
-        $\lambda(i,j)=f(d_{ij})$ include: (i) reciprocal similarity $f(d) = 1/d$,
-        and (ii) exponential similarity $f(d) = exp(-d)$.
+\noindent
+We will let $x_i$ be the number of \textit{new} dishes that customer $i$ draws.
+We will set $y_{-i} = \suml{j}{1}{i-1} x_j$, the number of existing dishes
+before customer $i$ draws new dishes, for $i=\{2,...,N\}$. We will define
+$y_{-i} = 0$.  $g_i(x_i) = \ds\frac{(\alpha/i)^{x_i}\exp(-\alpha/i)}{x_i!}$,
+which is the probability mass function for a Poisson distribution with
+parameter $\alpha/i$ and argument $x_i$.  $K$ = the number of (non-zero)
+columns in $\bm Z$.  $m_{-i,k}$ = the number of customers that took dish $k$
+before customer customer $i$ samples dishes.  $m_{-i} =
+\suml{k}{1}{K}m_{-i,k}$, which is the total number of dishes taken before
+customer $i$ samples dishes.  $h_{i,k} =
+\ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
+{\suml{k}{1}{y_i}\left(\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)
+\right)}$, the weight given to dish $k$ for customer $i$.  $p_{i,k} = h_{i,k}
+\ds\frac{m_{-i}}{i}$, the probability of customer $i$ drawing dish $k$. Note
+that when $\lambda$ is a constant, $p_{i,k}$ reduces to $m_{-i,k}$ as in the
+IBP.  $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$, the harmonic number.
+%$h(i) = \prodl{k}{1}{y_{-i}} 
+%(p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}$, for $i>1$,
+%and $1$ for $i=1$.
 
-  \item $x_i$ = the number of \textit{new} dishes that customer $i$ draws.
-
-  \item $y_{-i} = \suml{j}{1}{i-1} x_j$, the number of existing dishes
-        before customer $i$ draws new dishes, for $i=\{2,...,N\}$. We will
-        define $y_{-i} = 0$.
-
-  \item $g_i(x_i) = \ds\frac{(\alpha/i)^{x_i}\exp(-\alpha/i)}{x_i!}$, 
-        which is the probability mass function for a Poisson distribution 
-        with parameter $\alpha/i$ and argument $x_i$.
-
-  \item $K$ = the number of (non-zero) columns in $\bm Z$.
-
-  \item $m_{-i,k}$ = the number of customers that took dish $k$ before customer
-        customer $i$ samples dishes.
-
-  \item $m_{-i} = \suml{k}{1}{K}m_{-i,k}$, which is the total number of dishes 
-        taken before customer $i$ samples dishes.
-
-  \item $h_{i,k} = \ds\frac{\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}
-        {\suml{k}{1}{y_i}\left(\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)
-         \right)}$, the weight given to dish $k$ for customer $i$. \\
-
-  \item $p_{i,k} = h_{i,k} \ds\frac{m_{-i}}{i}$, the probability of customer
-        $i$ drawing dish $k$. Note that when $\lambda$ is a constant, $p_{i,k}$
-        reduces to $m_{-i,k}$ as in the IBP.
-  %\item $h(i) = \prodl{k}{1}{y_{-i}} 
-  %      (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}$, for $i>1$,
-  %      and $1$ for $i=1$.
-
-  \item $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$, the harmonic number.
-\end{itemize}
 
 
 \section{Sampling Algorithm for the AIBP}
@@ -158,12 +146,33 @@ information.\\
 \section{Simulation Study}
 % Are observations close together really going to share the same dishes?
 % Are distant observations going to disshare dishes?
+% What are the next rows going to be, conditioned on the first few rows?
 A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine
-the behavior of the AIBP \footnote{The simulation study can be accessed by
-installing and loading the ``shiny" package in R, then running the line: \\
+the behavior of the AIBP
+\footnote{The simulation study can be accessed by installing and loading the
+``shiny" package in R, then running the line: \\
 > runGitHub(`shinyTest',`luiarthur')\\\\
 The code for the simulation study can be viewed at: \\
-github.com/luiarthur/shinyTest}. 
+github.com/luiarthur/shinyTest}. A screen shot of the application used for the 
+simulation study can be found in the appendix. \\
+\noindent
+Through the simulation study, we were able to confirm that in simulation, the
+AIBP reduces to the IBP when the similarity function is set to a constant. We 
+were also interested in the behavior of the AIBP given particular distance 
+matrices. 
+
+\begin{table}[ht]
+\centering
+\[
+  \begin{pmatrix}{}
+    0 & 9 & 9 & 1 & 9 \\ 
+    9 & 0 & 9 & 9 & 9 \\ 
+    9 & 9 & 0 & 9 & 9 \\ 
+    1 & 9 & 9 & 0 & 9 \\ 
+    9 & 9 & 9 & 9 & 0 \\ 
+  \end{pmatrix}
+\]
+\end{table}
 
 \section{Comparisons between the AIBP \& ddIBP}
 One obvious difference between the AIBP and ddIBP is that the pmf for any given
