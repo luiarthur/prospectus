@@ -16,7 +16,7 @@ The order of customers in the dataset is not necessarily the order that the
 observations will be assigned dishes in implementation. We will call $\bm
 \sigma = (\sigma_1,..\sigma_n)$ the permutation of \textit{permutation} of the
 data. The permutation gives the sequence in which the n customers are assigned
-dishes, where the $t^{th}$ customer assigned is $\sigma_t$.  Note that $\bm
+dishes, where the $t^{th}$ customer assigned is $\sigma_t$. Note that $\bm
 \sigma = {1,...,n}$ when the customers are assigned in the order they appear
 in the dataset.\\
 
@@ -31,20 +31,23 @@ $\lambda(i,j)=f(d_{ij})$ include: (i) reciprocal similarity $f(d) = 1/d$, and
 (ii) exponential similarity $f(d) = exp(-d)$.\\
 
 \noindent
-We will let $x_i$ be the number of \textit{new} dishes that customer $i$ draws.
+We will let $x_i$ be the number of \textit{new} dishes that customer $i$ takes.
 We will set $y_{-i} = \suml{j}{1}{i-1} x_j$, the number of existing dishes
 before customer $i$ draws new dishes, for $i=\{2,...,N\}$. We will define
-$y_{-i} = 0$.  $g_i(x_i) = \ds\frac{(\alpha/i)^{x_i}\exp(-\alpha/i)}{x_i!}$,
-which is the probability mass function for a Poisson distribution with
-parameter $\alpha/i$ and argument $x_i$.  $K$ = the number of (non-zero)
-columns in $\bm Z$.  $m_{-i,k}$ = the number of customers that took dish $k$
-before customer customer $i$ samples dishes.  $m_{-i} =
-\suml{k}{1}{K}m_{-i,k}$, which is the total number of dishes taken before
-customer $i$ samples dishes.  $h_{i,k} = \hik$,
-the weight given to dish $k$ for customer $i$.  $p_{i,k} = h_{i,k}
-\ds\frac{m_{-i}}{i}$, the probability of customer $i$ drawing dish $k$. Note
-that when $\lambda$ is a constant, $p_{i,k}$ reduces to $m_{-i,k}$ as in the
-IBP.  $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$, the harmonic number.
+$y_{-i} = 0$. Note that $g_i(x_i) =
+\ds\frac{(\alpha/i)^{x_i}\exp(-\alpha/i)}{x_i!}$, which is the probability mass
+function for a Poisson distribution with parameter $\alpha/i$ and argument
+$x_i$. We will let the number of (non-zero) columns in $\bm Z$ be $K$.
+$m_{-i,k}$ = the number of customers that took dish $k$ before customer
+customer $i$ samples dishes. We will let  $m_{-i} = \suml{k}{1}{K}m_{-i,k}$ be
+the total number of dishes taken before customer $i$ samples any dishes.  We
+will assign 
+\[h_{i,k} = \hik,\]
+the weight given to sampling dish $k$ for
+customer $i$. The probability of customer $i$ drawing dish $k$ will be $p_{i,k}
+= h_{i,k} \ds\frac{m_{-i}}{i}$. Note that when $\lambda$ is a constant,
+$p_{i,k}$ reduces to $m_{-i,k}$ as in the IBP. We will define the harmonic
+number to be $H_N = \suml{i}{1}{N} \ds\frac{1}{i}$.
 %$h(i) = \prodl{k}{1}{y_{-i}} 
 %(p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}$, for $i>1$,
 %and $1$ for $i=1$.
@@ -63,9 +66,9 @@ The larger $\alpha$ is, the larger the number of total dishes drawn ($K$) will b
 To obtain a realization $\bm Z$ from an AIBP($\alpha$), the first customer
 draws an $x_1 \sim$ Poisson($\alpha$) number of dishes. This is indicated by
 setting $z_{1,1:x_1}$ to $1$. For each subsequent customer $i$, if there exists
-any previously sampled dishes (i.e. if $y_{-i}>0$), customer $i$ samples dish $k$
-with probability $\left(h_{i,k}\right)$, for $k \in \{1,...,y_{-i}\}$. The customer
-then samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes. 
+any previously sampled dishes (i.e. if $y_{-i}>0$), customer $i$ samples dish
+$k$ with probability $p_{i,k}$, for $k \in \{1,...,y_{-i}\}$. The customer then
+samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes. 
 
 %\begin{itemize}
 %  \item The first customer draws an $x_1=$ Poisson($\alpha$) number of dishes. This
@@ -79,12 +82,11 @@ then samples an additional $x_i \sim$ Poisson($\alpha/i$) number of new dishes.
 %     \end{itemize}
 %\end{itemize}
 
-
 \section{Probability Mass Function}
 Based on the sampling algorithm above, we can write down the p.m.f. for the
-proposed distribution as a product of independent probabilities for 
-each customer and for each dish. Here we will define 
-$\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.
+proposed distribution as a product of probabilities for each customer taking
+each dish. Here we will define one more quantity:
+$\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0$.\\
 
 \begin{align*}
   \text{P}(\bm Z|\bm\sigma)
@@ -114,13 +116,14 @@ $\prodl{k}{1}{y_{-i}} (p_{i,k})^{z_{i,k}}(1-p_{i,k})^{1-z_{i,k}}=1$ if $y_{-i}=0
     }
     %{\suml{k}{1}{y_{-i}}\sums{\sigma}{z_{-i,k}=1}{}\lambda(\sigma,\sigma_i)}\right)
     {\suml{k}{1}{y_{-i}}\suml{j}{1}{i-1}\lambda(\sigma_j,\sigma_i)z_{j,k}}\right)
-\end{align*}
+\end{align*}\\
 
 \section{Properties of the AIBP}
-In the literature review, it was shown how each of the distributions that made
-use of pairwise distance information could be reduced to the original
+In the literature review, it was shown how each of the mentioned distributions
+that made use of pairwise distance information could be reduced to their original
 distributions (CRP and IBP). The AIBP can likewise be reduced to the IBP when
-the similarity function is constant.\\
+the similarity function is constant (i.e. when f(d) = c, a constant).\\
+
 \noindent
 One of the properties we wished to preserve from the IBP was that the expected
 number of dishes taken by each customer would be $\alpha$. The algorithm
