@@ -1,1 +1,34 @@
-\chapter{Research Implications}
+\chapter{Research Conclusions \& Future Work}
+The unique properties of the AIBP are that (1) it has an explicit p.m.f., and
+(2) it uses distance information to tilt the distribution of dish-taking
+while respecting the natural dimensions of the IBP. Having an explicit p.m.f.
+is certainly more frequently a modeling advantage. It is not clear whether 
+preservation of dimensions is an advantage of the AIBP over the ddIBP. More study
+will be done to investigate the situations in which this property may be 
+appropriate for a modeling choice.\\
+
+\noindent
+In order to make use of the p.m.f. in MCMC to obtain posterior distributions, an
+appropriate proposal mechanism needs to be developed. The complexity occurs when
+the dimensions of the realizations from the IBP are changed from draw to draw. 
+The proposal mechanism needs to account for added columns, removed columns, and 
+changed values of the matrices drawn. \\
+
+\noindent
+So far, we have not discussed a practical area of application for the IBP.
+But there may be appropriate and natural applications in the development Bayesian
+mixed models. The linear mixed model can be written as
+\[
+  \bm{y = X\beta + Z\gamma + \epsilon}.
+\]
+Traditionally, $\bm Z$ is a design matrix determined by researchers. The design 
+matrix can consist of random intercepts for each subject in the dataset, and could
+also include random slopes. An interesting application of the IBP could be 
+to model the design matrix $\bm Z$. Though it is usually predetermined, modeling 
+$bm Z$ may be a way of determining latent features (in this case, intercepts) that 
+are generating the observations. If a smaller subset of the observations are
+generating common intercepts for the observations, modeling $\bm Z$ may be of 
+value. Adding distance information using the AIBP may be suitable if we know
+that observations that are similar are more likely to share intercepts. However, 
+not formal research has been conducted on this subject, and the application of 
+the IBP in mixed models warrants further investigation.

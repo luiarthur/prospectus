@@ -130,70 +130,139 @@ number of dishes taken by each customer would be $\alpha$. The algorithm
 prescribed above allocates dishes to customer based on their proximity to other
 customers.  That is if two customers are close together, they are more likely
 to share the same dishes. The number of new dishes sampled by each customer in
-the AIBP is the same as that in the IBP, by construction. So it remains to show
-that the expected number of previously-sampled dishes $r_i$ sampled by by
-customer $i$ in the AIBP is the same as that in the IBP. In the IBP, the
-expected row sum for the first row is $\alpha$, which is the same as in the
-AIBP. So the expected row sum is the same for the first row. For subsequent
-rows, the expected value of $r_i$ in the IBP is E$\left[\suml{k}{1}{y_{-i}}
-\frac{m_{-i,k}}{i}\right]$ = E$\left[\frac{m_{-i}}{i}\right]$ =
-$\frac{\alpha(i-1)}{i}$. For the AIBP, the expected value of $r_i$ is:
+the AIBP is the same as that in the IBP (and is equal to $\alpha/i$), by
+construction. So it remains to show that the expected number of
+previously-sampled dishes $r_i$ sampled by customer $i$ in the AIBP is the
+same as that in the IBP. In the IBP, the expected row sum for the first row is
+$\alpha$, which is the same as in the AIBP. So the expected row sum is the same
+for the first row. For subsequent rows, the expected value of $r_i$ in the IBP
+is E$\left[\suml{k}{1}{y_{-i}} \frac{m_{-i,k}}{i}\right]$ =
+E$\left[\frac{m_{-i}}{i}\right]$ = $\frac{\alpha(i-1)}{i}$. For the AIBP, the
+expected value of $r_i$ is:
 \[
   E\left[\suml{k}{1}{y_{-i}} h_{i,k} \frac{m_{-i}}{i}\right] = 
   E\left[\suml{k}{1}{y_{-i}}\hik \frac{m_{-i}}{i}\right] = 
   E\left[\frac{m_{-i}}{i}\right] = \frac{\alpha(i-1)}{i}
 \]
-So, the expected row sums are the same for the AIBP and IBP. Note also that
-since the mechanism for drawing new dishes is the same as that for the IBP, the
-expected total number of dishes drawn, which is the total number of non-zero
-columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in the IBP. 
-The implication is that the effective dimensions of the IBP are preserved in the
-IBP, but the allocation of dishes to customers is influenced by distance 
-information.\\
+Therefore, the expected row sums are the same for the AIBP and IBP. Note also
+that since the mechanism for drawing new dishes is the same as that for the
+IBP, the expected total number of dishes drawn, which is the total number of
+non-zero columns $\bm Z$ is $\alpha+\alpha/1+...+\alpha/N = \alpha H_N$, as in
+the IBP.  The implication is that the effective dimensions of the IBP are
+preserved in the AIBP, but the assignment of dishes to customers is altered
+by distance information.\\
 
 \section{Simulation Study}
 % Are observations close together really going to share the same dishes?
 % Are distant observations going to disshare dishes?
 % What are the next rows going to be, conditioned on the first few rows?
-A simulation study to compare the IBP, AIBP, and ddIBP was conducted to examine
-the behavior of the AIBP
+To better understand the behavior of the AIBP, a simulation study to compare
+the IBP, AIBP, and ddIBP. We are particularly interested in three questions: 
+(1) Do customers that are ``close" together tend to share similar dishes?
+(2) Do customers that are ``far" away from one another tend to not share dishes?
+(3) Given a particular arrangement for the first arbitrary number of customers,
+how do subsequent customers choose dishes? 
 \footnote{The simulation study can be accessed by installing and loading the
 ``shiny" package in R, then running the line: \\
 > runGitHub(`shinyTest',`luiarthur')\\\\
 The code for the simulation study can be viewed at: \\
-github.com/luiarthur/shinyTest}. A screen shot of the application used for the 
-simulation study can be found in the appendix. \\
+https://github.com/luiarthur/shinyTest\\\\
+A screen shot of the application used for the 
+simulation study can be found in the appendix.}
+
 \noindent
 Through the simulation study, we were able to confirm that in simulation, the
-AIBP reduces to the IBP when the similarity function is set to a constant. We 
-were also interested in the behavior of the AIBP given particular distance 
-matrices. 
+AIBP reduces to the IBP when the similarity function is set to a constant (see
+Figure 4.1).\\
+
+\begin{figure}\begin{center}
+  %\includegraphics[height=1\textwidth]{images/postA66.pdf}
+  \includegraphics{images/uni.pdf}
+  \caption{The expected values of draws from the IBP were computed via simulation.
+           Ten thousand realizations were drawn from the IBP with $\alpha=.5$.
+           The ten thousand matrices were then summed across and divided by the
+           number of realizations (10,000). Because draws from the IBP do not
+           always have the same dimensions, each of the matrices were first padded
+           with zeros to make matrix summation conformable. Expected values were
+           computed in a similar way for the AIBP and ddIBP. In simulation, we
+           have shown that the AIBP and ddIBP reduce to the IBP when the similarity
+           function is set to a constant value. E[ncol] is the expected number of
+           columns for a given distribution. Values in the cells of the matrices
+           are the probabilities of those cells taking the value `1' as opposed
+           to 0. The colors are an additional indication of the probabilities,
+           red is used for cells with higher probability; white is used for cells
+           with lower probability. The numbers to the left of the grids are the 
+           expected row sums. The numbers at the bottom of the grids are the
+           expected column sums.}
+\end{center}\end{figure}
+\noindent
+
+Now we will examine the behavior of the AIBP using the distance matrix given in 
+Table 4.1. This matrix is of particular interest because two pairs of customers
+(1 \& 3, and 2 \& 5) are close together. All other customer pairings are distant.
+One customer, customer 4, is far from every other customer. With these properties,
+this matrix may provide some interesting insights into the behavior of the AIBP.
+The similarity function used is the exponential function.\\
 
 \begin{table}[ht]
 \centering
 \[
   \begin{pmatrix}{}
-    0 & 9 & 9 & 1 & 9 \\ 
-    9 & 0 & 9 & 9 & 9 \\ 
-    9 & 9 & 0 & 9 & 9 \\ 
-    1 & 9 & 9 & 0 & 9 \\ 
-    9 & 9 & 9 & 9 & 0 \\ 
+    0 & 9 & 1 & 9 & 9 \\ 
+    9 & 0 & 9 & 9 & 1 \\ 
+    1 & 9 & 0 & 9 & 9 \\ 
+    9 & 9 & 9 & 0 & 9 \\ 
+    9 & 1 & 9 & 9 & 0 \\ 
   \end{pmatrix}
 \]
+\caption{Distance Matrix used in this simulation study.}
 \end{table}
 
+
+\noindent
+Figure 4.2 shows the expected value of the IBP, AIBP, and ddIBP simulated with
+$\alpha=1.5$, and the distance matrix $D$ in Table 4.1. The three distributions
+are clearly different. In the AIBP (middle), it is more probable for for the
+$3^{rd}$ customer to take dish $1$, than it is in the IBP. This is reasonable
+because the first customer tends to take the first dish frequently, and the
+$3^{rd}$ customer is close to the first. In the ddIBP, customer $3$ is more likely
+to take dish $1$ than any other customer. This is the main difference between the 
+behavior of the AIBP and the ddIBP. The ddIBP takes into account the distance 
+information of each customer to every other customer. In the AIBP, the distance 
+information for only customers assigned prior to the current customer is made
+use of. This may not necessarily be a desireable property, but it distinguishes 
+the ddIBP from the AIBP.\\
 
 \begin{figure}\begin{center}
   %\includegraphics[height=1\textwidth]{images/postA66.pdf}
   \includegraphics{images/eSim.pdf}
-  \caption{}
+  \caption{Expected value of the IBP, AIBP, and ddIBP, with $\alpha=2$, and 
+           distance matrix D as shown in Table 4.1. }
 \end{center}\end{figure}
 
+\noindent
+Figure 4.3 shows the expected values of the IBP, AIBP, and ddIBP, when the
+first two rows are predetermined. In this case, the first two columns of the
+first row were set to `1'; and the third and fourth columns of the second row
+were set to `1'. It is clear that the distance information is respected in both
+the ddIBP and the AIBP. It appears that in the AIBP, customers that are close
+to one another tend to share the same dishes. Customer 3 is close to customer
+1, and consequently takes dishes 1 and 2 more frequently than he would in the
+IBP.  Customer 4 is far away from all other customers. Are more accurately, he
+is equidistant from all other customers. So distance information does not have
+an effect on him. He takes dishes with probabiltiy proportional to their
+popularity, and not proportional to his proximity to customers that have taken
+those dishes. Customer 5 tends to take dishes 3 and 4 because he is close to
+customer 2, who has taken those dishes. In the ddIBP, customers that are far
+apart tend to not share dishes. Instead of taking previously sampled dishes,
+customer 4 samples more new dishes. 
 
 \begin{figure}\begin{center}
   %\includegraphics[height=1\textwidth]{images/postA66.pdf}
   \includegraphics{images/eSimFixed.pdf}
-  \caption{}
+  \caption{Expected value of the IBP, AIBP, and ddIBP with $\alpha=2$, and
+           distance matrix D as shown in Table 4.1, with the first two rows
+           pre-set.}
 \end{center}\end{figure}
 
 
