@@ -9,7 +9,7 @@ GLOBIGNORE=main.tex:main.pdf
 rm main.*
 unset GLOBIGNORE
 
-firefox main.pdf &
+#firefox main.pdf &
 
 # I need 2 pdflatex, 1 bibtex, pdflatex.
 # bibtex main.aux
